@@ -2,8 +2,7 @@
 
 [![Join the chat at https://gitter.im/use-package/Lobby](https://badges.gitter.im/use-package/Lobby.svg)](https://gitter.im/use-package/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://github.com/jwiegley/use-package/actions/workflows/test.yml/badge.svg)](https://github.com/jwiegley/use-package/actions)
-[![MELPA](https://melpa.org/packages/use-package-badge.svg)](https://melpa.org/#/use-package)
-[![MELPA Stable](https://stable.melpa.org/packages/use-package-badge.svg)](https://stable.melpa.org/#/use-package)
+[![GNU ELPA](https://elpa.gnu.org/packages/use-package.svg)](https://elpa.gnu.org/packages/use-package.html)
 
 The `use-package` macro allows you to isolate package configuration in your
 `.emacs` file in a way that is both performance-oriented and, well, tidy.  I
@@ -60,7 +59,7 @@ and loading of packages.
 ## Installing use-package
 
 Either clone from this GitHub repository or install from
-[MELPA](https://melpa.org/) (recommended).
+[GNU ELPA](https://elpa.gnu.org/) (recommended).
 
 ## Getting started
 
@@ -568,7 +567,13 @@ When byte-compiling your `.emacs` file, disabled declarations are omitted
 from the output entirely, to accelerate startup times.
 
 **NOTE**: `:when` is provided as an alias for `:if`, and `:unless foo` means
-the same thing as `:if (not foo)`. For example, the following will also stop
+the same thing as `:if (not foo)`.
+
+### Conditional loading before :preface
+
+If you need to conditionalize a use-package form so that the condition occurs
+before even the `:preface` is executed, simply use `when` around the
+use-package form itself.  For example, the following will also stop
 `:ensure` from happening on Mac systems:
 
 ``` elisp
@@ -578,12 +583,6 @@ the same thing as `:if (not foo)`. For example, the following will also stop
     :config
     (exec-path-from-shell-initialize)))
 ```
-
-### Conditional loading before :preface
-
-If you need to conditionalize a use-package form so that the condition occurs
-before even the `:preface` is executed, simply use `when` around the
-use-package form itself:
 
 ### Loading packages in sequence
 
@@ -876,7 +875,7 @@ like
 Lastly, when running on Emacs 24.4 or later, use-package can pin a package to
 a specific archive, allowing you to mix and match packages from different
 archives.  The primary use-case for this is preferring packages from the
-`melpa-stable` and `gnu` archives, but using specific packages from `melpa`
+`gnu` and `melpa-stable` archives, but using specific packages from `melpa`
 when you need to track newer versions than what is available in the `stable`
 archives is also a valid use-case.
 
@@ -903,7 +902,7 @@ Example:
 ``` elisp
 (use-package company
   :ensure t
-  :pin melpa-stable)
+  :pin gnu)
 
 (use-package evil
   :ensure t)
